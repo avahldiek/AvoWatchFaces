@@ -2,6 +2,8 @@ AvoWatchFaces
 =============
 Set of WatchFaces for Android Wear. Tested on Moto360 only.
 
+Download most recent APK from https://github.com/vahldiek/AvoWatchFaces/tree/master/realeases
+
 1) Continuous analog event WF
   - Updates minutes and second fingers on every clock tick
   - Shows a ring ov squares used to highlight calendar events

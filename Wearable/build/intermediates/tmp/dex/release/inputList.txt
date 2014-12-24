@@ -1,0 +1,10 @@
+/home/vahldiek/AndroidStudioProjects/WatchFace/Wearable/build/intermediates/classes/release
+/home/vahldiek/AndroidStudioProjects/WatchFace/Wearable/build/intermediates/pre-dexed/release/internal_impl-21.0.3-68cdae8f93969705cdc0d1ab01f446e75671352a.jar
+/home/vahldiek/AndroidStudioProjects/WatchFace/Wearable/build/intermediates/pre-dexed/release/support-annotations-21.0.3-6cedae95748193678778d49135fe447ad2093f78.jar
+/home/vahldiek/AndroidStudioProjects/WatchFace/Wearable/build/intermediates/pre-dexed/release/classes-07c2b852ebd12671dad56b1b4833bd114e3a8da9.jar
+/home/vahldiek/AndroidStudioProjects/WatchFace/Wearable/build/intermediates/pre-dexed/release/classes-8fc6bdd78482b6b0644541bed5643bef41b7c2d0.jar
+/home/vahldiek/AndroidStudioProjects/WatchFace/Wearable/build/intermediates/pre-dexed/release/internal_impl-21.0.3-782b5817eae557a7784bd2d21e28cffaec7ce511.jar
+/home/vahldiek/AndroidStudioProjects/WatchFace/Wearable/build/intermediates/pre-dexed/release/classes-e6d9469fa551f2c30aaa437250d302c97dc8aff9.jar
+/home/vahldiek/AndroidStudioProjects/WatchFace/Wearable/build/intermediates/pre-dexed/release/classes-89a88aa0d8fb30ba46897ae03491da84953da545.jar
+/home/vahldiek/AndroidStudioProjects/WatchFace/Wearable/build/intermediates/pre-dexed/release/classes-d111c5bbc6df67e937a5154542bcad94f228d75e.jar
+/home/vahldiek/AndroidStudioProjects/WatchFace/Wearable/build/intermediates/pre-dexed/release/classes-0b3bc7aff982bae28676c669422277b983fd4d1e.jar

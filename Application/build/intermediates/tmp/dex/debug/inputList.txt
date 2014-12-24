@@ -1,0 +1,10 @@
+/home/vahldiek/AndroidStudioProjects/WatchFace/Application/build/intermediates/classes/debug
+/home/vahldiek/AndroidStudioProjects/WatchFace/Application/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-1c1b93475ec23f119e72fed06028cdca8b412d85.jar
+/home/vahldiek/AndroidStudioProjects/WatchFace/Application/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-6cedae95748193678778d49135fe447ad2093f78.jar
+/home/vahldiek/AndroidStudioProjects/WatchFace/Application/build/intermediates/pre-dexed/debug/classes-f164e02141a2e1f8383cb8c0b57c9e5b368845c9.jar
+/home/vahldiek/AndroidStudioProjects/WatchFace/Application/build/intermediates/pre-dexed/debug/classes-51db3f817cfd91457eb26532c094778079ad9d86.jar
+/home/vahldiek/AndroidStudioProjects/WatchFace/Application/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-b3bf362120952aaf6c354af07112edb5847a0754.jar
+/home/vahldiek/AndroidStudioProjects/WatchFace/Application/build/intermediates/pre-dexed/debug/classes-ebc2ba2ac6df0480bf860bd09276eb8731d55915.jar
+/home/vahldiek/AndroidStudioProjects/WatchFace/Application/build/intermediates/pre-dexed/debug/classes-b1267d1c04f3c4a5c07d21cfbf11e3a3637a3b19.jar
+/home/vahldiek/AndroidStudioProjects/WatchFace/Application/build/intermediates/pre-dexed/debug/classes-14da1d495d22156e4e7e040f3c691dedb06c3e6f.jar
+/home/vahldiek/AndroidStudioProjects/WatchFace/Application/build/intermediates/pre-dexed/debug/classes-6517e30946b8c65c2ea5a79c6d0b254e58c91956.jar

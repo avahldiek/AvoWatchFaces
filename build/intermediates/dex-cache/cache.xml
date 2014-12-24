@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/home/vahldiek/AndroidStudioProjects/WatchFace/Application/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="/home/vahldiek/AndroidStudioProjects/WatchFace/Application/build/intermediates/pre-dexed/debug/classes-14da1d495d22156e4e7e040f3c691dedb06c3e6f.jar" />
+    </item>
+    <item
+        jar="/home/vahldiek/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="/home/vahldiek/AndroidStudioProjects/WatchFace/Wearable/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-6cedae95748193678778d49135fe447ad2093f78.jar" />
+    </item>
+    <item
+        jar="/home/vahldiek/AndroidStudioProjects/WatchFace/Application/build/intermediates/exploded-aar/com.google.android.gms/play-services-wearable/6.5.87/classes.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="6384c6cd674a22610b932d9464aa6938d067f285">
+        <dex dex="/home/vahldiek/AndroidStudioProjects/WatchFace/Application/build/intermediates/pre-dexed/debug/classes-51db3f817cfd91457eb26532c094778079ad9d86.jar" />
+    </item>
+    <item
+        jar="/home/vahldiek/AndroidStudioProjects/WatchFace/Application/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="/home/vahldiek/AndroidStudioProjects/WatchFace/Application/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-b3bf362120952aaf6c354af07112edb5847a0754.jar" />
+    </item>
+    <item
+        jar="/home/vahldiek/AndroidStudioProjects/WatchFace/Wearable/build/intermediates/exploded-aar/com.android.support/support-v13/21.0.3/libs/internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="0dcc55e70f7ebf7238fe2ec53f662eb378ab2668">
+        <dex dex="/home/vahldiek/AndroidStudioProjects/WatchFace/Wearable/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-68cdae8f93969705cdc0d1ab01f446e75671352a.jar" />
+    </item>
+    <item
+        jar="/home/vahldiek/AndroidStudioProjects/WatchFace/Application/build/intermediates/exploded-aar/com.google.android.support/wearable/1.1.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="27f19641b81b1078e653d2f0e5d1ed44d158a785">
+        <dex dex="/home/vahldiek/AndroidStudioProjects/WatchFace/Application/build/intermediates/pre-dexed/debug/classes-ebc2ba2ac6df0480bf860bd09276eb8731d55915.jar" />
+    </item>
+    <item
+        jar="/home/vahldiek/AndroidStudioProjects/WatchFace/Wearable/build/intermediates/exploded-aar/com.google.android.support/wearable/1.1.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="27f19641b81b1078e653d2f0e5d1ed44d158a785">
+        <dex dex="/home/vahldiek/AndroidStudioProjects/WatchFace/Wearable/build/intermediates/pre-dexed/debug/classes-e6d9469fa551f2c30aaa437250d302c97dc8aff9.jar" />
+    </item>
+    <item
+        jar="/home/vahldiek/AndroidStudioProjects/WatchFace/Application/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/21.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="efeda77c808750cb670ee9c48d8a1835d89dbcb2">
+        <dex dex="/home/vahldiek/AndroidStudioProjects/WatchFace/Application/build/intermediates/pre-dexed/debug/classes-b1267d1c04f3c4a5c07d21cfbf11e3a3637a3b19.jar" />
+    </item>
+    <item
+        jar="/home/vahldiek/AndroidStudioProjects/WatchFace/Wearable/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/6.5.87/classes.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="95482e7c792a7c0d5a9d5461e97726bd54fe9549">
+        <dex dex="/home/vahldiek/AndroidStudioProjects/WatchFace/Wearable/build/intermediates/pre-dexed/debug/classes-0b3bc7aff982bae28676c669422277b983fd4d1e.jar" />
+    </item>
+    <item
+        jar="/home/vahldiek/AndroidStudioProjects/WatchFace/Wearable/build/intermediates/exploded-aar/com.google.android.gms/play-services-wearable/6.5.87/classes.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="6384c6cd674a22610b932d9464aa6938d067f285">
+        <dex dex="/home/vahldiek/AndroidStudioProjects/WatchFace/Wearable/build/intermediates/pre-dexed/debug/classes-8fc6bdd78482b6b0644541bed5643bef41b7c2d0.jar" />
+    </item>
+    <item
+        jar="/home/vahldiek/AndroidStudioProjects/WatchFace/Wearable/build/intermediates/exploded-aar/com.android.support/support-v13/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="2c2071dcaf7a008c3b01a6381a33be55396bab09">
+        <dex dex="/home/vahldiek/AndroidStudioProjects/WatchFace/Wearable/build/intermediates/pre-dexed/debug/classes-07c2b852ebd12671dad56b1b4833bd114e3a8da9.jar" />
+    </item>
+    <item
+        jar="/home/vahldiek/AndroidStudioProjects/WatchFace/Wearable/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/21.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="efeda77c808750cb670ee9c48d8a1835d89dbcb2">
+        <dex dex="/home/vahldiek/AndroidStudioProjects/WatchFace/Wearable/build/intermediates/pre-dexed/debug/classes-89a88aa0d8fb30ba46897ae03491da84953da545.jar" />
+    </item>
+    <item
+        jar="/home/vahldiek/AndroidStudioProjects/WatchFace/Wearable/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="/home/vahldiek/AndroidStudioProjects/WatchFace/Wearable/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-782b5817eae557a7784bd2d21e28cffaec7ce511.jar" />
+    </item>
+    <item
+        jar="/home/vahldiek/AndroidStudioProjects/WatchFace/Application/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/6.5.87/classes.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="95482e7c792a7c0d5a9d5461e97726bd54fe9549">
+        <dex dex="/home/vahldiek/AndroidStudioProjects/WatchFace/Application/build/intermediates/pre-dexed/debug/classes-6517e30946b8c65c2ea5a79c6d0b254e58c91956.jar" />
+    </item>
+    <item
+        jar="/home/vahldiek/AndroidStudioProjects/WatchFace/Application/build/intermediates/exploded-aar/com.android.support/support-v13/21.0.3/libs/internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="0dcc55e70f7ebf7238fe2ec53f662eb378ab2668">
+        <dex dex="/home/vahldiek/AndroidStudioProjects/WatchFace/Application/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-1c1b93475ec23f119e72fed06028cdca8b412d85.jar" />
+    </item>
+    <item
+        jar="/home/vahldiek/AndroidStudioProjects/WatchFace/Wearable/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="/home/vahldiek/AndroidStudioProjects/WatchFace/Wearable/build/intermediates/pre-dexed/debug/classes-d111c5bbc6df67e937a5154542bcad94f228d75e.jar" />
+    </item>
+    <item
+        jar="/home/vahldiek/AndroidStudioProjects/WatchFace/Application/build/intermediates/exploded-aar/com.android.support/support-v13/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="2c2071dcaf7a008c3b01a6381a33be55396bab09">
+        <dex dex="/home/vahldiek/AndroidStudioProjects/WatchFace/Application/build/intermediates/pre-dexed/debug/classes-f164e02141a2e1f8383cb8c0b57c9e5b368845c9.jar" />
+    </item>
+
+</items>

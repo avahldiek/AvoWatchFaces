@@ -104,6 +104,13 @@ public class SimpleCalEvents implements Comparable<SimpleCalEvents>{
             return false;
     }
 
+    public boolean endsBefore(long timeInMs) {
+        if(timeInMs > endTime)
+            return true;
+        else
+            return false;
+    }
+
     public Paint getPaint() {
         return paint;
     }

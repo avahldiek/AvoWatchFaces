@@ -439,6 +439,10 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
             }
 
 
+
+            long curTime = System.currentTimeMillis();
+
+
             Paint p = mCalHighlightABPaint;
             for (SimpleCalEvents ev : mCalEvents) {
 
@@ -491,6 +495,9 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
                 }
                 // ticks in the middle
 
+                if(!ev.endsBefore(curTime)) {
+                    
+                }
 
                 Log.v(TAG, "paint " + ev + " with " + ticksTillEnd + " ticks");
 

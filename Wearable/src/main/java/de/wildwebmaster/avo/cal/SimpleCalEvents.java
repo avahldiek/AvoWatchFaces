@@ -73,6 +73,14 @@ public class SimpleCalEvents implements Comparable<SimpleCalEvents>{
         return getMinutesOfTS(endTime);
     }
 
+    public long getStartTime() {
+        return startTime;
+    }
+
+    public long getEndTime() {
+        return endTime;
+    }
+
     private int getHourOfTS(long ts) {
 
         Calendar calendar = Calendar.getInstance();

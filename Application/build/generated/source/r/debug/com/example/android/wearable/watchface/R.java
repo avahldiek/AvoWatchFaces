@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package com.example.android.wearable.watchface;
+package de.wildwebmaster.avo;
 
 public final class R {
     public static final class array {
@@ -568,7 +568,7 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #BoxInsetLayout_Layout_layout_box com.example.android.wearable.watchface:layout_box}</code></td><td></td></tr>
+           <tr><td><code>{@link #BoxInsetLayout_Layout_layout_box de.wildwebmaster.avo:layout_box}</code></td><td></td></tr>
            </table>
            @see #BoxInsetLayout_Layout_layout_box
          */
@@ -576,7 +576,7 @@ containing a value of this type.
             0x7f010000
         };
         /**
-          <p>This symbol is the offset where the {@link com.example.android.wearable.watchface.R.attr#layout_box}
+          <p>This symbol is the offset where the {@link de.wildwebmaster.avo.R.attr#layout_box}
           attribute's value can be found in the {@link #BoxInsetLayout_Layout} array.
 
 
@@ -592,7 +592,7 @@ containing a value of this type.
 <tr><td><code>bottom</code></td><td>0x08</td><td></td></tr>
 <tr><td><code>all</code></td><td>0x0F</td><td></td></tr>
 </table>
-          @attr name com.example.android.wearable.watchface:layout_box
+          @attr name de.wildwebmaster.avo:layout_box
         */
         public static final int BoxInsetLayout_Layout_layout_box = 0;
         /** Attributes that can be used with a CircledImageView.
@@ -602,13 +602,13 @@ containing a value of this type.
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
            <tr><td><code>{@link #CircledImageView_android_src android:src}</code></td><td></td></tr>
-           <tr><td><code>{@link #CircledImageView_circle_border_color com.example.android.wearable.watchface:circle_border_color}</code></td><td></td></tr>
-           <tr><td><code>{@link #CircledImageView_circle_border_width com.example.android.wearable.watchface:circle_border_width}</code></td><td></td></tr>
-           <tr><td><code>{@link #CircledImageView_circle_color com.example.android.wearable.watchface:circle_color}</code></td><td></td></tr>
-           <tr><td><code>{@link #CircledImageView_circle_padding com.example.android.wearable.watchface:circle_padding}</code></td><td></td></tr>
-           <tr><td><code>{@link #CircledImageView_circle_radius com.example.android.wearable.watchface:circle_radius}</code></td><td></td></tr>
-           <tr><td><code>{@link #CircledImageView_circle_radius_pressed com.example.android.wearable.watchface:circle_radius_pressed}</code></td><td></td></tr>
-           <tr><td><code>{@link #CircledImageView_shadow_width com.example.android.wearable.watchface:shadow_width}</code></td><td></td></tr>
+           <tr><td><code>{@link #CircledImageView_circle_border_color de.wildwebmaster.avo:circle_border_color}</code></td><td></td></tr>
+           <tr><td><code>{@link #CircledImageView_circle_border_width de.wildwebmaster.avo:circle_border_width}</code></td><td></td></tr>
+           <tr><td><code>{@link #CircledImageView_circle_color de.wildwebmaster.avo:circle_color}</code></td><td></td></tr>
+           <tr><td><code>{@link #CircledImageView_circle_padding de.wildwebmaster.avo:circle_padding}</code></td><td></td></tr>
+           <tr><td><code>{@link #CircledImageView_circle_radius de.wildwebmaster.avo:circle_radius}</code></td><td></td></tr>
+           <tr><td><code>{@link #CircledImageView_circle_radius_pressed de.wildwebmaster.avo:circle_radius_pressed}</code></td><td></td></tr>
+           <tr><td><code>{@link #CircledImageView_shadow_width de.wildwebmaster.avo:shadow_width}</code></td><td></td></tr>
            </table>
            @see #CircledImageView_android_src
            @see #CircledImageView_circle_border_color
@@ -630,7 +630,7 @@ containing a value of this type.
         */
         public static final int CircledImageView_android_src = 0;
         /**
-          <p>This symbol is the offset where the {@link com.example.android.wearable.watchface.R.attr#circle_border_color}
+          <p>This symbol is the offset where the {@link de.wildwebmaster.avo.R.attr#circle_border_color}
           attribute's value can be found in the {@link #CircledImageView} array.
 
 
@@ -641,11 +641,11 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.example.android.wearable.watchface:circle_border_color
+          @attr name de.wildwebmaster.avo:circle_border_color
         */
         public static final int CircledImageView_circle_border_color = 5;
         /**
-          <p>This symbol is the offset where the {@link com.example.android.wearable.watchface.R.attr#circle_border_width}
+          <p>This symbol is the offset where the {@link de.wildwebmaster.avo.R.attr#circle_border_width}
           attribute's value can be found in the {@link #CircledImageView} array.
 
 
@@ -657,11 +657,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.example.android.wearable.watchface:circle_border_width
+          @attr name de.wildwebmaster.avo:circle_border_width
         */
         public static final int CircledImageView_circle_border_width = 4;
         /**
-          <p>This symbol is the offset where the {@link com.example.android.wearable.watchface.R.attr#circle_color}
+          <p>This symbol is the offset where the {@link de.wildwebmaster.avo.R.attr#circle_color}
           attribute's value can be found in the {@link #CircledImageView} array.
 
 
@@ -672,11 +672,11 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.example.android.wearable.watchface:circle_color
+          @attr name de.wildwebmaster.avo:circle_color
         */
         public static final int CircledImageView_circle_color = 1;
         /**
-          <p>This symbol is the offset where the {@link com.example.android.wearable.watchface.R.attr#circle_padding}
+          <p>This symbol is the offset where the {@link de.wildwebmaster.avo.R.attr#circle_padding}
           attribute's value can be found in the {@link #CircledImageView} array.
 
 
@@ -688,11 +688,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.example.android.wearable.watchface:circle_padding
+          @attr name de.wildwebmaster.avo:circle_padding
         */
         public static final int CircledImageView_circle_padding = 6;
         /**
-          <p>This symbol is the offset where the {@link com.example.android.wearable.watchface.R.attr#circle_radius}
+          <p>This symbol is the offset where the {@link de.wildwebmaster.avo.R.attr#circle_radius}
           attribute's value can be found in the {@link #CircledImageView} array.
 
 
@@ -704,11 +704,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.example.android.wearable.watchface:circle_radius
+          @attr name de.wildwebmaster.avo:circle_radius
         */
         public static final int CircledImageView_circle_radius = 2;
         /**
-          <p>This symbol is the offset where the {@link com.example.android.wearable.watchface.R.attr#circle_radius_pressed}
+          <p>This symbol is the offset where the {@link de.wildwebmaster.avo.R.attr#circle_radius_pressed}
           attribute's value can be found in the {@link #CircledImageView} array.
 
 
@@ -720,11 +720,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.example.android.wearable.watchface:circle_radius_pressed
+          @attr name de.wildwebmaster.avo:circle_radius_pressed
         */
         public static final int CircledImageView_circle_radius_pressed = 3;
         /**
-          <p>This symbol is the offset where the {@link com.example.android.wearable.watchface.R.attr#shadow_width}
+          <p>This symbol is the offset where the {@link de.wildwebmaster.avo.R.attr#shadow_width}
           attribute's value can be found in the {@link #CircledImageView} array.
 
 
@@ -736,7 +736,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.example.android.wearable.watchface:shadow_width
+          @attr name de.wildwebmaster.avo:shadow_width
         */
         public static final int CircledImageView_shadow_width = 7;
         /** Attributes that can be used with a DelayedConfirmationView.
@@ -745,7 +745,7 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #DelayedConfirmationView_update_interval com.example.android.wearable.watchface:update_interval}</code></td><td></td></tr>
+           <tr><td><code>{@link #DelayedConfirmationView_update_interval de.wildwebmaster.avo:update_interval}</code></td><td></td></tr>
            </table>
            @see #DelayedConfirmationView_update_interval
          */
@@ -753,7 +753,7 @@ containing a value of this type.
             0x7f010008
         };
         /**
-          <p>This symbol is the offset where the {@link com.example.android.wearable.watchface.R.attr#update_interval}
+          <p>This symbol is the offset where the {@link de.wildwebmaster.avo.R.attr#update_interval}
           attribute's value can be found in the {@link #DelayedConfirmationView} array.
 
 
@@ -763,7 +763,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.example.android.wearable.watchface:update_interval
+          @attr name de.wildwebmaster.avo:update_interval
         */
         public static final int DelayedConfirmationView_update_interval = 0;
         /** Attributes that can be used with a DotsPageIndicator.
@@ -772,19 +772,19 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #DotsPageIndicator_dotColor com.example.android.wearable.watchface:dotColor}</code></td><td></td></tr>
-           <tr><td><code>{@link #DotsPageIndicator_dotColorSelected com.example.android.wearable.watchface:dotColorSelected}</code></td><td></td></tr>
-           <tr><td><code>{@link #DotsPageIndicator_dotFadeInDuration com.example.android.wearable.watchface:dotFadeInDuration}</code></td><td></td></tr>
-           <tr><td><code>{@link #DotsPageIndicator_dotFadeOutDelay com.example.android.wearable.watchface:dotFadeOutDelay}</code></td><td></td></tr>
-           <tr><td><code>{@link #DotsPageIndicator_dotFadeOutDuration com.example.android.wearable.watchface:dotFadeOutDuration}</code></td><td></td></tr>
-           <tr><td><code>{@link #DotsPageIndicator_dotFadeWhenIdle com.example.android.wearable.watchface:dotFadeWhenIdle}</code></td><td></td></tr>
-           <tr><td><code>{@link #DotsPageIndicator_dotRadius com.example.android.wearable.watchface:dotRadius}</code></td><td></td></tr>
-           <tr><td><code>{@link #DotsPageIndicator_dotRadiusSelected com.example.android.wearable.watchface:dotRadiusSelected}</code></td><td></td></tr>
-           <tr><td><code>{@link #DotsPageIndicator_dotShadowColor com.example.android.wearable.watchface:dotShadowColor}</code></td><td></td></tr>
-           <tr><td><code>{@link #DotsPageIndicator_dotShadowDx com.example.android.wearable.watchface:dotShadowDx}</code></td><td></td></tr>
-           <tr><td><code>{@link #DotsPageIndicator_dotShadowDy com.example.android.wearable.watchface:dotShadowDy}</code></td><td></td></tr>
-           <tr><td><code>{@link #DotsPageIndicator_dotShadowRadius com.example.android.wearable.watchface:dotShadowRadius}</code></td><td></td></tr>
-           <tr><td><code>{@link #DotsPageIndicator_dotSpacing com.example.android.wearable.watchface:dotSpacing}</code></td><td></td></tr>
+           <tr><td><code>{@link #DotsPageIndicator_dotColor de.wildwebmaster.avo:dotColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #DotsPageIndicator_dotColorSelected de.wildwebmaster.avo:dotColorSelected}</code></td><td></td></tr>
+           <tr><td><code>{@link #DotsPageIndicator_dotFadeInDuration de.wildwebmaster.avo:dotFadeInDuration}</code></td><td></td></tr>
+           <tr><td><code>{@link #DotsPageIndicator_dotFadeOutDelay de.wildwebmaster.avo:dotFadeOutDelay}</code></td><td></td></tr>
+           <tr><td><code>{@link #DotsPageIndicator_dotFadeOutDuration de.wildwebmaster.avo:dotFadeOutDuration}</code></td><td></td></tr>
+           <tr><td><code>{@link #DotsPageIndicator_dotFadeWhenIdle de.wildwebmaster.avo:dotFadeWhenIdle}</code></td><td></td></tr>
+           <tr><td><code>{@link #DotsPageIndicator_dotRadius de.wildwebmaster.avo:dotRadius}</code></td><td></td></tr>
+           <tr><td><code>{@link #DotsPageIndicator_dotRadiusSelected de.wildwebmaster.avo:dotRadiusSelected}</code></td><td></td></tr>
+           <tr><td><code>{@link #DotsPageIndicator_dotShadowColor de.wildwebmaster.avo:dotShadowColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #DotsPageIndicator_dotShadowDx de.wildwebmaster.avo:dotShadowDx}</code></td><td></td></tr>
+           <tr><td><code>{@link #DotsPageIndicator_dotShadowDy de.wildwebmaster.avo:dotShadowDy}</code></td><td></td></tr>
+           <tr><td><code>{@link #DotsPageIndicator_dotShadowRadius de.wildwebmaster.avo:dotShadowRadius}</code></td><td></td></tr>
+           <tr><td><code>{@link #DotsPageIndicator_dotSpacing de.wildwebmaster.avo:dotSpacing}</code></td><td></td></tr>
            </table>
            @see #DotsPageIndicator_dotColor
            @see #DotsPageIndicator_dotColorSelected
@@ -807,7 +807,7 @@ containing a value of this type.
             0x7f010015
         };
         /**
-          <p>This symbol is the offset where the {@link com.example.android.wearable.watchface.R.attr#dotColor}
+          <p>This symbol is the offset where the {@link de.wildwebmaster.avo.R.attr#dotColor}
           attribute's value can be found in the {@link #DotsPageIndicator} array.
 
 
@@ -818,11 +818,11 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.example.android.wearable.watchface:dotColor
+          @attr name de.wildwebmaster.avo:dotColor
         */
         public static final int DotsPageIndicator_dotColor = 3;
         /**
-          <p>This symbol is the offset where the {@link com.example.android.wearable.watchface.R.attr#dotColorSelected}
+          <p>This symbol is the offset where the {@link de.wildwebmaster.avo.R.attr#dotColorSelected}
           attribute's value can be found in the {@link #DotsPageIndicator} array.
 
 
@@ -833,11 +833,11 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.example.android.wearable.watchface:dotColorSelected
+          @attr name de.wildwebmaster.avo:dotColorSelected
         */
         public static final int DotsPageIndicator_dotColorSelected = 4;
         /**
-          <p>This symbol is the offset where the {@link com.example.android.wearable.watchface.R.attr#dotFadeInDuration}
+          <p>This symbol is the offset where the {@link de.wildwebmaster.avo.R.attr#dotFadeInDuration}
           attribute's value can be found in the {@link #DotsPageIndicator} array.
 
 
@@ -847,11 +847,11 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.example.android.wearable.watchface:dotFadeInDuration
+          @attr name de.wildwebmaster.avo:dotFadeInDuration
         */
         public static final int DotsPageIndicator_dotFadeInDuration = 8;
         /**
-          <p>This symbol is the offset where the {@link com.example.android.wearable.watchface.R.attr#dotFadeOutDelay}
+          <p>This symbol is the offset where the {@link de.wildwebmaster.avo.R.attr#dotFadeOutDelay}
           attribute's value can be found in the {@link #DotsPageIndicator} array.
 
 
@@ -861,11 +861,11 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.example.android.wearable.watchface:dotFadeOutDelay
+          @attr name de.wildwebmaster.avo:dotFadeOutDelay
         */
         public static final int DotsPageIndicator_dotFadeOutDelay = 6;
         /**
-          <p>This symbol is the offset where the {@link com.example.android.wearable.watchface.R.attr#dotFadeOutDuration}
+          <p>This symbol is the offset where the {@link de.wildwebmaster.avo.R.attr#dotFadeOutDuration}
           attribute's value can be found in the {@link #DotsPageIndicator} array.
 
 
@@ -875,11 +875,11 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.example.android.wearable.watchface:dotFadeOutDuration
+          @attr name de.wildwebmaster.avo:dotFadeOutDuration
         */
         public static final int DotsPageIndicator_dotFadeOutDuration = 7;
         /**
-          <p>This symbol is the offset where the {@link com.example.android.wearable.watchface.R.attr#dotFadeWhenIdle}
+          <p>This symbol is the offset where the {@link de.wildwebmaster.avo.R.attr#dotFadeWhenIdle}
           attribute's value can be found in the {@link #DotsPageIndicator} array.
 
 
@@ -889,11 +889,11 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.example.android.wearable.watchface:dotFadeWhenIdle
+          @attr name de.wildwebmaster.avo:dotFadeWhenIdle
         */
         public static final int DotsPageIndicator_dotFadeWhenIdle = 5;
         /**
-          <p>This symbol is the offset where the {@link com.example.android.wearable.watchface.R.attr#dotRadius}
+          <p>This symbol is the offset where the {@link de.wildwebmaster.avo.R.attr#dotRadius}
           attribute's value can be found in the {@link #DotsPageIndicator} array.
 
 
@@ -905,11 +905,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.example.android.wearable.watchface:dotRadius
+          @attr name de.wildwebmaster.avo:dotRadius
         */
         public static final int DotsPageIndicator_dotRadius = 1;
         /**
-          <p>This symbol is the offset where the {@link com.example.android.wearable.watchface.R.attr#dotRadiusSelected}
+          <p>This symbol is the offset where the {@link de.wildwebmaster.avo.R.attr#dotRadiusSelected}
           attribute's value can be found in the {@link #DotsPageIndicator} array.
 
 
@@ -921,11 +921,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.example.android.wearable.watchface:dotRadiusSelected
+          @attr name de.wildwebmaster.avo:dotRadiusSelected
         */
         public static final int DotsPageIndicator_dotRadiusSelected = 2;
         /**
-          <p>This symbol is the offset where the {@link com.example.android.wearable.watchface.R.attr#dotShadowColor}
+          <p>This symbol is the offset where the {@link de.wildwebmaster.avo.R.attr#dotShadowColor}
           attribute's value can be found in the {@link #DotsPageIndicator} array.
 
 
@@ -936,11 +936,11 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.example.android.wearable.watchface:dotShadowColor
+          @attr name de.wildwebmaster.avo:dotShadowColor
         */
         public static final int DotsPageIndicator_dotShadowColor = 9;
         /**
-          <p>This symbol is the offset where the {@link com.example.android.wearable.watchface.R.attr#dotShadowDx}
+          <p>This symbol is the offset where the {@link de.wildwebmaster.avo.R.attr#dotShadowDx}
           attribute's value can be found in the {@link #DotsPageIndicator} array.
 
 
@@ -952,11 +952,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.example.android.wearable.watchface:dotShadowDx
+          @attr name de.wildwebmaster.avo:dotShadowDx
         */
         public static final int DotsPageIndicator_dotShadowDx = 11;
         /**
-          <p>This symbol is the offset where the {@link com.example.android.wearable.watchface.R.attr#dotShadowDy}
+          <p>This symbol is the offset where the {@link de.wildwebmaster.avo.R.attr#dotShadowDy}
           attribute's value can be found in the {@link #DotsPageIndicator} array.
 
 
@@ -968,11 +968,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.example.android.wearable.watchface:dotShadowDy
+          @attr name de.wildwebmaster.avo:dotShadowDy
         */
         public static final int DotsPageIndicator_dotShadowDy = 12;
         /**
-          <p>This symbol is the offset where the {@link com.example.android.wearable.watchface.R.attr#dotShadowRadius}
+          <p>This symbol is the offset where the {@link de.wildwebmaster.avo.R.attr#dotShadowRadius}
           attribute's value can be found in the {@link #DotsPageIndicator} array.
 
 
@@ -984,11 +984,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.example.android.wearable.watchface:dotShadowRadius
+          @attr name de.wildwebmaster.avo:dotShadowRadius
         */
         public static final int DotsPageIndicator_dotShadowRadius = 10;
         /**
-          <p>This symbol is the offset where the {@link com.example.android.wearable.watchface.R.attr#dotSpacing}
+          <p>This symbol is the offset where the {@link de.wildwebmaster.avo.R.attr#dotSpacing}
           attribute's value can be found in the {@link #DotsPageIndicator} array.
 
 
@@ -1000,7 +1000,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.example.android.wearable.watchface:dotSpacing
+          @attr name de.wildwebmaster.avo:dotSpacing
         */
         public static final int DotsPageIndicator_dotSpacing = 0;
         /** Attributes that can be used with a LoadingImageView.
@@ -1009,9 +1009,9 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #LoadingImageView_circleCrop com.example.android.wearable.watchface:circleCrop}</code></td><td></td></tr>
-           <tr><td><code>{@link #LoadingImageView_imageAspectRatio com.example.android.wearable.watchface:imageAspectRatio}</code></td><td></td></tr>
-           <tr><td><code>{@link #LoadingImageView_imageAspectRatioAdjust com.example.android.wearable.watchface:imageAspectRatioAdjust}</code></td><td></td></tr>
+           <tr><td><code>{@link #LoadingImageView_circleCrop de.wildwebmaster.avo:circleCrop}</code></td><td></td></tr>
+           <tr><td><code>{@link #LoadingImageView_imageAspectRatio de.wildwebmaster.avo:imageAspectRatio}</code></td><td></td></tr>
+           <tr><td><code>{@link #LoadingImageView_imageAspectRatioAdjust de.wildwebmaster.avo:imageAspectRatioAdjust}</code></td><td></td></tr>
            </table>
            @see #LoadingImageView_circleCrop
            @see #LoadingImageView_imageAspectRatio
@@ -1021,7 +1021,7 @@ containing a value of this type.
             0x7f010016, 0x7f010017, 0x7f010018
         };
         /**
-          <p>This symbol is the offset where the {@link com.example.android.wearable.watchface.R.attr#circleCrop}
+          <p>This symbol is the offset where the {@link de.wildwebmaster.avo.R.attr#circleCrop}
           attribute's value can be found in the {@link #LoadingImageView} array.
 
 
@@ -1031,11 +1031,11 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.example.android.wearable.watchface:circleCrop
+          @attr name de.wildwebmaster.avo:circleCrop
         */
         public static final int LoadingImageView_circleCrop = 2;
         /**
-          <p>This symbol is the offset where the {@link com.example.android.wearable.watchface.R.attr#imageAspectRatio}
+          <p>This symbol is the offset where the {@link de.wildwebmaster.avo.R.attr#imageAspectRatio}
           attribute's value can be found in the {@link #LoadingImageView} array.
 
 
@@ -1045,11 +1045,11 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.example.android.wearable.watchface:imageAspectRatio
+          @attr name de.wildwebmaster.avo:imageAspectRatio
         */
         public static final int LoadingImageView_imageAspectRatio = 1;
         /**
-          <p>This symbol is the offset where the {@link com.example.android.wearable.watchface.R.attr#imageAspectRatioAdjust}
+          <p>This symbol is the offset where the {@link de.wildwebmaster.avo.R.attr#imageAspectRatioAdjust}
           attribute's value can be found in the {@link #LoadingImageView} array.
 
 
@@ -1063,7 +1063,7 @@ containing a value of this type.
 <tr><td><code>adjust_width</code></td><td>1</td><td></td></tr>
 <tr><td><code>adjust_height</code></td><td>2</td><td></td></tr>
 </table>
-          @attr name com.example.android.wearable.watchface:imageAspectRatioAdjust
+          @attr name de.wildwebmaster.avo:imageAspectRatioAdjust
         */
         public static final int LoadingImageView_imageAspectRatioAdjust = 0;
         /** Attributes that can be used with a WatchViewStub.
@@ -1072,8 +1072,8 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #WatchViewStub_rectLayout com.example.android.wearable.watchface:rectLayout}</code></td><td></td></tr>
-           <tr><td><code>{@link #WatchViewStub_roundLayout com.example.android.wearable.watchface:roundLayout}</code></td><td></td></tr>
+           <tr><td><code>{@link #WatchViewStub_rectLayout de.wildwebmaster.avo:rectLayout}</code></td><td></td></tr>
+           <tr><td><code>{@link #WatchViewStub_roundLayout de.wildwebmaster.avo:roundLayout}</code></td><td></td></tr>
            </table>
            @see #WatchViewStub_rectLayout
            @see #WatchViewStub_roundLayout
@@ -1082,23 +1082,23 @@ containing a value of this type.
             0x7f010019, 0x7f01001a
         };
         /**
-          <p>This symbol is the offset where the {@link com.example.android.wearable.watchface.R.attr#rectLayout}
+          <p>This symbol is the offset where the {@link de.wildwebmaster.avo.R.attr#rectLayout}
           attribute's value can be found in the {@link #WatchViewStub} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.example.android.wearable.watchface:rectLayout
+          @attr name de.wildwebmaster.avo:rectLayout
         */
         public static final int WatchViewStub_rectLayout = 0;
         /**
-          <p>This symbol is the offset where the {@link com.example.android.wearable.watchface.R.attr#roundLayout}
+          <p>This symbol is the offset where the {@link de.wildwebmaster.avo.R.attr#roundLayout}
           attribute's value can be found in the {@link #WatchViewStub} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.example.android.wearable.watchface:roundLayout
+          @attr name de.wildwebmaster.avo:roundLayout
         */
         public static final int WatchViewStub_roundLayout = 1;
         /** Attributes that can be used with a WearableHeaderTextView.
@@ -1107,8 +1107,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #WearableHeaderTextView_circular_layout_gravity com.example.android.wearable.watchface:circular_layout_gravity}</code></td><td></td></tr>
-           <tr><td><code>{@link #WearableHeaderTextView_circular_text_size com.example.android.wearable.watchface:circular_text_size}</code></td><td></td></tr>
+           <tr><td><code>{@link #WearableHeaderTextView_circular_layout_gravity de.wildwebmaster.avo:circular_layout_gravity}</code></td><td></td></tr>
+           <tr><td><code>{@link #WearableHeaderTextView_circular_text_size de.wildwebmaster.avo:circular_text_size}</code></td><td></td></tr>
            </table>
            @see #WearableHeaderTextView_circular_layout_gravity
            @see #WearableHeaderTextView_circular_text_size
@@ -1117,7 +1117,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
             0x7f01001b, 0x7f01001c
         };
         /**
-          <p>This symbol is the offset where the {@link com.example.android.wearable.watchface.R.attr#circular_layout_gravity}
+          <p>This symbol is the offset where the {@link de.wildwebmaster.avo.R.attr#circular_layout_gravity}
           attribute's value can be found in the {@link #WearableHeaderTextView} array.
 
 
@@ -1135,11 +1135,11 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <tr><td><code>center_horizontal</code></td><td>0x01</td><td></td></tr>
 <tr><td><code>center</code></td><td>0x11</td><td></td></tr>
 </table>
-          @attr name com.example.android.wearable.watchface:circular_layout_gravity
+          @attr name de.wildwebmaster.avo:circular_layout_gravity
         */
         public static final int WearableHeaderTextView_circular_layout_gravity = 0;
         /**
-          <p>This symbol is the offset where the {@link com.example.android.wearable.watchface.R.attr#circular_text_size}
+          <p>This symbol is the offset where the {@link de.wildwebmaster.avo.R.attr#circular_text_size}
           attribute's value can be found in the {@link #WearableHeaderTextView} array.
 
 
@@ -1151,7 +1151,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.example.android.wearable.watchface:circular_text_size
+          @attr name de.wildwebmaster.avo:circular_text_size
         */
         public static final int WearableHeaderTextView_circular_text_size = 1;
     };

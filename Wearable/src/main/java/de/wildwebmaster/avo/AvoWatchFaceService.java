@@ -38,6 +38,7 @@ import android.view.SurfaceHolder;
 import de.wildwebmaster.avo.R;
 
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -448,10 +449,10 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
 
                 if(!isInAmbientMode()) {
                     p = ev.getPaint();
-                    Log.v(TAG, "not ambient paint set to " + p);
+//                    Log.v(TAG, "not ambient paint set to " + p);
                     if(p == null) {
                         p = mCalHighlightPaint;
-                        Log.v(TAG, "no paint set");
+//                        Log.v(TAG, "no paint set");
                     }
                 }
 
@@ -495,11 +496,26 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
                 }
                 // ticks in the middle
 
-                if(!ev.endsBefore(curTime)) {
-                    
+                Log.v(TAG, curTime + " > " + ev.getEndTime());
+
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTimeInMillis(curTime);
+                long cH = calendar.get(Calendar.HOUR_OF_DAY);
+                if(cH > 12)
+                    cH -= 12;
+                long cM = calendar.get(Calendar.MINUTE);
+
+                if (ev.hoursEnd()-12 > cH) {
+
+                    long toRemove = (long) Math.ceil(ev.minutesEnd() / (60/intermedTicks) + (ev.hoursEnd() - 12 - cH) * intermedTicks);
+
+//                    Log.v(TAG, "remove " + toRemove + " ticks from " + ticksTillEnd + " using " + cH + "," + cM + "," + ev.hoursEnd() +"," + ev.minutesEnd());
+
+                    ticksTillEnd -= toRemove;
+
                 }
 
-                Log.v(TAG, "paint " + ev + " with " + ticksTillEnd + " ticks");
+//                Log.v(TAG, "paint " + ev + " with " + ticksTillEnd + " ticks");
 
                 for (int ticks = 0; ticks < ticksTillEnd; ticks++) {
 
@@ -532,10 +548,10 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
                         break;
                     }
 
-                    Log.v(TAG, "pass " + sce);
+//                    Log.v(TAG, "pass " + sce);
                 }
-
-                Log.v(TAG, "first " + first);
+//
+//                Log.v(TAG, "first " + first);
 
                 if(first != null) {
                     String title = first.getTitle();

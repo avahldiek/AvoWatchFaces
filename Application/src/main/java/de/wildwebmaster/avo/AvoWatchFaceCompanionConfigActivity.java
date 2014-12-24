@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.wearable.watchface;
+package de.wildwebmaster.avo;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -44,17 +44,17 @@ import com.google.android.gms.wearable.Wearable;
  * activity ({@code DigitalWatchFaceWearableConfigActivity}), allows for setting the background
  * color. Additionally, enables setting the color for hour, minute and second digits.
  */
-public class DigitalWatchFaceCompanionConfigActivity extends Activity
+public class AvoWatchFaceCompanionConfigActivity extends Activity
         implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
                 ResultCallback<DataApi.DataItemResult> {
-    private static final String TAG = "DigitalWatchFaceConfig";
+    private static final String TAG = "AvoWatchFaceConfig";
 
     // TODO: use the shared constants (needs covering all the samples with Gradle build model)
     private static final String KEY_BACKGROUND_COLOR = "BACKGROUND_COLOR";
     private static final String KEY_HOURS_COLOR = "HOURS_COLOR";
     private static final String KEY_MINUTES_COLOR = "MINUTES_COLOR";
     private static final String KEY_SECONDS_COLOR = "SECONDS_COLOR";
-    private static final String PATH_WITH_FEATURE = "/watch_face_config/Digital";
+    private static final String PATH_WITH_FEATURE = "/watch_face_config/Avo";
 
     private GoogleApiClient mGoogleApiClient;
     private String mPeerId;
@@ -62,7 +62,7 @@ public class DigitalWatchFaceCompanionConfigActivity extends Activity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_digital_watch_face_config);
+        setContentView(de.wildwebmaster.avo.R.layout.activity_avo_watch_face_config);
 
         mPeerId = getIntent().getStringExtra(WatchFaceCompanion.EXTRA_PEER_ID);
         mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -73,7 +73,7 @@ public class DigitalWatchFaceCompanionConfigActivity extends Activity
 
         ComponentName name = getIntent().getParcelableExtra(
                 WatchFaceCompanion.EXTRA_WATCH_FACE_COMPONENT);
-        TextView label = (TextView)findViewById(R.id.label);
+        TextView label = (TextView)findViewById(de.wildwebmaster.avo.R.id.label);
         label.setText(label.getText() + " (" + name.getClassName() + ")");
     }
 
@@ -136,8 +136,8 @@ public class DigitalWatchFaceCompanionConfigActivity extends Activity
 
     private void displayNoConnectedDeviceDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        String messageText = getResources().getString(R.string.title_no_device_connected);
-        String okText = getResources().getString(R.string.ok_no_device_connected);
+        String messageText = getResources().getString(de.wildwebmaster.avo.R.string.title_no_device_connected);
+        String okText = getResources().getString(de.wildwebmaster.avo.R.string.ok_no_device_connected);
         builder.setMessage(messageText)
                 .setCancelable(false)
                 .setPositiveButton(okText, new DialogInterface.OnClickListener() {
@@ -151,20 +151,20 @@ public class DigitalWatchFaceCompanionConfigActivity extends Activity
      * Sets up selected items for all pickers according to given {@code config} and sets up their
      * item selection listeners.
      *
-     * @param config the {@code DigitalWatchFaceService} config {@link DataMap}. If null, the
+     * @param config the {@code DigitalWatchFaceService} config {@link com.google.android.gms.wearable.DataMap}. If null, the
      *         default items are selected.
      */
     private void setUpAllPickers(DataMap config) {
-        setUpColorPickerSelection(R.id.background, KEY_BACKGROUND_COLOR, config,
-                R.string.color_black);
-        setUpColorPickerSelection(R.id.hours, KEY_HOURS_COLOR, config, R.string.color_white);
-        setUpColorPickerSelection(R.id.minutes, KEY_MINUTES_COLOR, config, R.string.color_white);
-        setUpColorPickerSelection(R.id.seconds, KEY_SECONDS_COLOR, config, R.string.color_gray);
+        setUpColorPickerSelection(de.wildwebmaster.avo.R.id.background, KEY_BACKGROUND_COLOR, config,
+                de.wildwebmaster.avo.R.string.color_black);
+        setUpColorPickerSelection(de.wildwebmaster.avo.R.id.hours, KEY_HOURS_COLOR, config, de.wildwebmaster.avo.R.string.color_white);
+        setUpColorPickerSelection(de.wildwebmaster.avo.R.id.minutes, KEY_MINUTES_COLOR, config, de.wildwebmaster.avo.R.string.color_white);
+        setUpColorPickerSelection(de.wildwebmaster.avo.R.id.seconds, KEY_SECONDS_COLOR, config, de.wildwebmaster.avo.R.string.color_gray);
 
-        setUpColorPickerListener(R.id.background, KEY_BACKGROUND_COLOR);
-        setUpColorPickerListener(R.id.hours, KEY_HOURS_COLOR);
-        setUpColorPickerListener(R.id.minutes, KEY_MINUTES_COLOR);
-        setUpColorPickerListener(R.id.seconds, KEY_SECONDS_COLOR);
+        setUpColorPickerListener(de.wildwebmaster.avo.R.id.background, KEY_BACKGROUND_COLOR);
+        setUpColorPickerListener(de.wildwebmaster.avo.R.id.hours, KEY_HOURS_COLOR);
+        setUpColorPickerListener(de.wildwebmaster.avo.R.id.minutes, KEY_MINUTES_COLOR);
+        setUpColorPickerListener(de.wildwebmaster.avo.R.id.seconds, KEY_SECONDS_COLOR);
     }
 
     private void setUpColorPickerSelection(int spinnerId, final String configKey, DataMap config,
@@ -178,7 +178,7 @@ public class DigitalWatchFaceCompanionConfigActivity extends Activity
             color = defaultColor;
         }
         Spinner spinner = (Spinner) findViewById(spinnerId);
-        String[] colorNames = getResources().getStringArray(R.array.color_array);
+        String[] colorNames = getResources().getStringArray(de.wildwebmaster.avo.R.array.color_array);
         for (int i = 0; i < colorNames.length; i++) {
             if (Color.parseColor(colorNames[i]) == color) {
                 spinner.setSelection(i);

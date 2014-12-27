@@ -1,8 +1,5 @@
 package de.wildwebmaster.avo;
 
-import android.util.Log;
-
-import java.sql.Time;
 import java.util.List;
 
 /**
@@ -36,7 +33,7 @@ public class CalendarHarmonizer {
 
             int startTick = event.getHarmoziedStart(numTicks);
             int endTick = event.getHarmoziedEnd(numTicks);
-            int length = 0;
+            int length;
 
 
 //            Log.v(TAG, "event start tick " + startTick + " endTick " + endTick);
@@ -56,9 +53,11 @@ public class CalendarHarmonizer {
             for(int tick = 0; tick < length; tick++) {
 
                 int curTick = (tick+startTick)%numTicks;
-                if(adjTicks.isTickSet(curTick))
+                if(adjTicks.isTickSet(curTick)) {
+//                    Log.v(TAG, "continue " + curTick);
                     continue;
-                if(cur.getTick(numTicks) == curTick && set == 1) {
+                }
+                if(curTick == cur.getTick(numTicks)) {
 //                    Log.v(TAG, "break at "+ curTick+ "," + adjTicks.isTickSet(curTick) + "," +cur.getTick(numTicks));
                     break;
                 }

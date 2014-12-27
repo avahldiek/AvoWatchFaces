@@ -220,7 +220,7 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
 
             mCalEvents = new LinkedList<>();
 
-            Log.v(TAG, "call adjustableticks constructor");
+//            Log.v(TAG, "call adjustableticks constructor");
             adjCalTicks = new AdjustableTicks<SimpleCalEvents>(48, 0, 12);
             CH = new CalendarHarmonizer(48, adjCalTicks);
         }
@@ -302,7 +302,7 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
                 // create save
             //drawCalTicks(canvas, width, height);
             if(adjCalTicks != null)
-                adjCalTicks.draw(canvas, width, height);
+                adjCalTicks.draw(canvas, width, height, isInAmbientMode());
             drawTicks(canvas, centerX, centerY);
 
             if (!isInAmbientMode()) {
@@ -689,11 +689,13 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
                 Uri.Builder builder =
                     WearableCalendarContract.Instances.CONTENT_URI.buildUpon();
                 ContentUris.appendId(builder, begin);
-                ContentUris.appendId(builder, begin + DateUtils.HOUR_IN_MILLIS * 12);
+                ContentUris.appendId(builder, begin + DateUtils.HOUR_IN_MILLIS * 13);
 //                String []projection = {CalendarContract.Events.DTSTART, CalendarContract.Events.DTEND};
                 final Cursor cursor = getContentResolver().query(builder.build(),
                         null, null, null, null);
                 int numMeetings = cursor.getCount();
+//                Log.v(TAG, "num meetings " + numMeetings);
+
                 cursor.moveToFirst();
 
 //                Log.v(TAG, Arrays.toString(cursor.getColumnNames()));
@@ -712,7 +714,7 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
 //                    Log.v(TAG, "[" + startTimeId +", "+endTimeId+", "+colorId+", "+allDayId+", "+titleId+", "+locationId + "]" );
 
                     if(startTimeId != -1 && endTimeId != -1) {
-                        while (cursor.moveToNext()) {
+                       do {
                             try {
                                 long startTime = Long.parseLong(cursor.getString(startTimeId));
                                 long endTime = Long.parseLong(cursor.getString(endTimeId));
@@ -732,9 +734,9 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
                                 }
 
                             } catch (Exception e) {
-
+                                Log.v(TAG, e.getMessage() + "\n" + e.getStackTrace());
                             }
-                        }
+                        } while (cursor.moveToNext());
                     }
                 }
 
@@ -749,7 +751,7 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
                 if(!tmpList.equals(mCalEvents)) {
                     // only update when calendar has changed
                     mCalEvents = tmpList;
-                    Log.v(TAG, "calling CH.update");
+//                    Log.v(TAG, "calling CH.update");
                     CH.update(mCalEvents);
                 }
 

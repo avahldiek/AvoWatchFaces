@@ -30,6 +30,7 @@ public class AdjustableTicks<T extends Paintable> {
     private float space = 0.3f;
 
     private Paint tickColor = null;
+    private Paint spaceColor = null;
     private Paint tickHighlightColor = null;
     private Paint getTickHighlightColorAmbient = null;
     private Paint blackPaint = null;
@@ -47,6 +48,12 @@ public class AdjustableTicks<T extends Paintable> {
         tickColor.setStrokeWidth(3.f);
         tickColor.setAntiAlias(true);
         tickColor.setStrokeCap(Paint.Cap.SQUARE);
+
+        spaceColor = new Paint();
+        spaceColor.setARGB(255, 110, 110, 110);
+        spaceColor.setStrokeWidth(3.f);
+        spaceColor.setAntiAlias(true);
+        spaceColor.setStrokeCap(Paint.Cap.SQUARE);
 
         tickHighlightColor = new Paint();
         tickHighlightColor.setARGB(255,  0, 126, 255);
@@ -200,17 +207,19 @@ public class AdjustableTicks<T extends Paintable> {
     }
 
 
-    public void draw(Canvas canvas, float width, float height) {
+    public void draw(Canvas canvas, float width, float height, boolean isAmbient) {
 
         if(canvas == null || entries == null)
             return;
 
+        canvas.drawArc(spaceTillBorder, spaceTillBorder, width - spaceTillBorder, height-spaceTillBorder, 0, 360, true, spaceColor);
+
         for (int ticks = 0; ticks < numTicks; ticks ++) {
 
-            Paint p = tickColor;
+            Paint p = (isAmbient) ? getTickHighlightColorAmbient : tickColor;
 
             T v = entries.get(ticks);
-            if(v != null) {
+            if(v != null && !isAmbient) {
                 p = v.getPaint();
             }
 
@@ -222,7 +231,7 @@ public class AdjustableTicks<T extends Paintable> {
 
         float bump = 15;
         canvas.drawArc(tickDepth, tickDepth, width - tickDepth, height-tickDepth, 0, 360/6 - 360/48, true, blackPaint);
-        canvas.drawRect(tickDepth+bump+44, height/2, width - (tickDepth+bump+44), height-(tickDepth+bump+16), blackPaint);
+        canvas.drawRect(tickDepth+bump+44, height/2, width - (tickDepth+bump+44), height-(tickDepth+bump+15), blackPaint);
         canvas.drawArc(tickDepth, tickDepth, width - tickDepth, height-tickDepth, 360/4 + 360/12 + 360/48, 360 - (360/4 + 360/12 + 360/48), true, blackPaint);
     }
 }

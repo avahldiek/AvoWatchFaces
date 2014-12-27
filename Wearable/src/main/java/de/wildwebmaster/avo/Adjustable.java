@@ -8,5 +8,6 @@ import android.graphics.Paint;
 public interface Adjustable {
 
     public void clear();
+
     public Paint getPaint();
 }

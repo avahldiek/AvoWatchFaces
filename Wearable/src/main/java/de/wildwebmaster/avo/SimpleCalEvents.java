@@ -2,27 +2,23 @@ package de.wildwebmaster.avo;
 
 import android.graphics.Paint;
 
-import java.util.Calendar;
-
 /**
  * Created by vahldiek on 12/19/14.
  */
-public class SimpleCalEvents implements Comparable<SimpleCalEvents>, Paintable{
+public class SimpleCalEvents implements Comparable<SimpleCalEvents>, Paintable {
 
+    private static final int SECOND = 1000;
+    private static final int MINUTE = 60 * SECOND;
+    private static final int HOUR = 60 * MINUTE;
+    private static final int DAY = 24 * HOUR;
     private String title;
     private String location;
     private long color = 0;
     private long startTime = 0;
     private long endTime = 0;
     private Paint paint = null;
-
     private TimeHarmonizer startH;
     private TimeHarmonizer endH;
-
-    private static final int SECOND = 1000;
-    private static final int MINUTE = 60 * SECOND;
-    private static final int HOUR = 60 * MINUTE;
-    private static final int DAY = 24 * HOUR;
 
     public SimpleCalEvents(String title, String location, long color, long startTime, long endTime) {
 
@@ -36,7 +32,7 @@ public class SimpleCalEvents implements Comparable<SimpleCalEvents>, Paintable{
         endH = new TimeHarmonizer(endTime);
 
         this.paint = new Paint();//mCalHighlightPaint; ;
-        this.paint.setColor((int)this.color);
+        this.paint.setColor((int) this.color);
     }
 
     public int compareTo(SimpleCalEvents sce) {
@@ -115,14 +111,14 @@ public class SimpleCalEvents implements Comparable<SimpleCalEvents>, Paintable{
     }
 
     public boolean startedPastSeconds(long pastTime) {
-        if(System.currentTimeMillis() > startTime+pastTime *1000)
+        if (System.currentTimeMillis() > startTime + pastTime * 1000)
             return true;
         else
             return false;
     }
 
     public boolean endsBefore(long timeInMs) {
-        if(timeInMs > endTime)
+        if (timeInMs > endTime)
             return true;
         else
             return false;
@@ -133,9 +129,9 @@ public class SimpleCalEvents implements Comparable<SimpleCalEvents>, Paintable{
     }
 
     public boolean equals(Object o) {
-        if(o instanceof SimpleCalEvents) {
+        if (o instanceof SimpleCalEvents) {
             SimpleCalEvents snd = (SimpleCalEvents) o;
-            if(snd.startTime == this.startTime && snd.endTime == this.endTime
+            if (snd.startTime == this.startTime && snd.endTime == this.endTime
                     && snd.color == this.color && snd.title.equals(this.title)
                     && snd.location.equals(this.location)) {
                 return true;

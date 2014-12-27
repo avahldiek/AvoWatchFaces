@@ -52,6 +52,29 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
     }
 
     private class Engine extends CanvasWatchFaceService.Engine {
+        static final int MSG_LOAD_MEETINGS = 0;
+        /**
+         * Handler to load the meetings once a minute in interactive mode.
+         */
+        final Handler mLoadMeetingsHandler = new Handler() {
+            @Override
+            public void handleMessage(Message message) {
+                switch (message.what) {
+                    case MSG_LOAD_MEETINGS:
+                        cancelLoadMeetingTask();
+                        mLoadMeetingsTask = new LoadMeetingsTask();
+                        mLoadMeetingsTask.execute();
+                        break;
+                }
+            }
+        };
+        final BroadcastReceiver mTimeZoneReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                mTime.clear(intent.getStringExtra("time-zone"));
+                mTime.setToNow();
+            }
+        };
         Paint mHourPaint;
         Paint mMinutePaint;
         Paint mSecondPaint;
@@ -69,28 +92,20 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
         float curMinRot = -1.0f;
         AdjustableTicks<SimpleCalEvents> adjCalTicks;
         CalendarHarmonizer CH;
-
-        private AsyncTask<Void, Void, Integer> mLoadMeetingsTask;
-        static final int MSG_LOAD_MEETINGS = 0;
         int mNumMeetings;
         List<SimpleCalEvents> mCalEvents;
-
-        /** Handler to load the meetings once a minute in interactive mode. */
-        final Handler mLoadMeetingsHandler = new Handler() {
-            @Override
-            public void handleMessage(Message message) {
-                switch (message.what) {
-                    case MSG_LOAD_MEETINGS:
-                        cancelLoadMeetingTask();
-                        mLoadMeetingsTask = new LoadMeetingsTask();
-                        mLoadMeetingsTask.execute();
-                        break;
-                }
-            }
-        };
-
+        boolean mRegisteredTimeZoneReceiver = false;
+        /**
+         * Whether the display supports fewer bits for each color in ambient mode. When true, we
+         * disable anti-aliasing in ambient mode.
+         */
+        boolean mLowBitAmbient;
+        Bitmap mBackgroundBitmap;
+        Bitmap mBackgroundBitmapAB;
+        Bitmap mBackgroundScaledBitmap;
+        Bitmap mBackgroundScaledBitmapAB;
+        private AsyncTask<Void, Void, Integer> mLoadMeetingsTask;
         private boolean mIsReceiverRegistered;
-
         private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -101,26 +116,6 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
                 }
             }
         };
-
-        final BroadcastReceiver mTimeZoneReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                mTime.clear(intent.getStringExtra("time-zone"));
-                mTime.setToNow();
-            }
-        };
-        boolean mRegisteredTimeZoneReceiver = false;
-
-        /**
-         * Whether the display supports fewer bits for each color in ambient mode. When true, we
-         * disable anti-aliasing in ambient mode.
-         */
-        boolean mLowBitAmbient;
-
-        Bitmap mBackgroundBitmap;
-        Bitmap mBackgroundBitmapAB;
-        Bitmap mBackgroundScaledBitmap;
-        Bitmap mBackgroundScaledBitmapAB;
 
         @Override
         public void onCreate(SurfaceHolder holder) {
@@ -184,13 +179,13 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
             mCalPaint.setStrokeCap(Paint.Cap.SQUARE);
 
             mCalHighlightPaint = new Paint();
-            mCalHighlightPaint.setARGB(255,  0, 126, 255);
+            mCalHighlightPaint.setARGB(255, 0, 126, 255);
             mCalHighlightPaint.setStrokeWidth(3.f);
             mCalHighlightPaint.setAntiAlias(true);
             mCalHighlightPaint.setStrokeCap(Paint.Cap.SQUARE);
 
             mCalHighlightABPaint = new Paint();
-            mCalHighlightABPaint.setARGB(255,  100, 100, 100);
+            mCalHighlightABPaint.setARGB(255, 100, 100, 100);
             mCalHighlightABPaint.setStrokeWidth(3.f);
             mCalHighlightABPaint.setAntiAlias(true);
             mCalHighlightABPaint.setStrokeCap(Paint.Cap.SQUARE);
@@ -297,11 +292,11 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
 
 //            if(canvas.getSaveCount() == 0) {
 
-            canvas.drawRect(0,0,width, height, new Paint(Color.BLACK));
+            canvas.drawRect(0, 0, width, height, new Paint(Color.BLACK));
 
-                // create save
+            // create save
             //drawCalTicks(canvas, width, height);
-            if(adjCalTicks != null)
+            if (adjCalTicks != null)
                 adjCalTicks.draw(canvas, width, height, isInAmbientMode());
             drawTicks(canvas, centerX, centerY);
 
@@ -317,7 +312,7 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
                 canvas.drawBitmap(mBackgroundScaledBitmap, 0, 0, null);
             }
 
-            canvas.drawText("avo", width/2-18, 65, mLogoPaint);
+            canvas.drawText("avo", width / 2 - 18, 65, mLogoPaint);
             drawNextEvent(canvas, width, height);
 
 
@@ -334,7 +329,7 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
             float secRot = seconds / 30f * (float) Math.PI;
             int minutes = mTime.minute;
             float minRot = (minutes) / 30f * (float) Math.PI;
-            float hrRot = ((mTime.hour + (minutes / 60f)) / 6f ) * (float) Math.PI;
+            float hrRot = ((mTime.hour + (minutes / 60f)) / 6f) * (float) Math.PI;
 
             float secLength = centerX - 20;
             float innerSpace = 13.f;
@@ -357,11 +352,11 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
 
 
             if (!isInAmbientMode()) {
-                minRot += (seconds/60f) / 30f * (float) Math.PI;
+                minRot += (seconds / 60f) / 30f * (float) Math.PI;
                 curMinRot = minRot;
             }
             // protection for switch to ambient mode and minute is jumping back
-            if(minRot < curMinRot)
+            if (minRot < curMinRot)
                 minRot = curMinRot;
             float minX = (float) Math.sin(minRot) * minLength;
             float minY = (float) -Math.cos(minRot) * minLength;
@@ -370,12 +365,12 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
             canvas.drawLine(centerX + minXinner, centerY + minYinner, centerX + minX, centerY + minY, mMinutePaint);
 
             float innerCircleRadius = 6;
-            canvas.drawArc(centerX-innerCircleRadius, centerY-innerCircleRadius, centerX+innerCircleRadius, centerY+innerCircleRadius, 0, 360, true, mMinutePaint);
+            canvas.drawArc(centerX - innerCircleRadius, centerY - innerCircleRadius, centerX + innerCircleRadius, centerY + innerCircleRadius, 0, 360, true, mMinutePaint);
 
-            if(isInAmbientMode())
-                canvas.drawArc(centerX-2, centerY-2, centerX+2, centerY+2, 0, 360, true, mBlackPaint);
+            if (isInAmbientMode())
+                canvas.drawArc(centerX - 2, centerY - 2, centerX + 2, centerY + 2, 0, 360, true, mBlackPaint);
             else
-                canvas.drawArc(centerX-2, centerY-2, centerX+2, centerY+2, 0, 360, true, mSecondPaint);
+                canvas.drawArc(centerX - 2, centerY - 2, centerX + 2, centerY + 2, 0, 360, true, mSecondPaint);
         }
 
         private void drawTicks(Canvas canvas, float centerX, float centerY) {
@@ -385,7 +380,7 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
             for (int tickIndex = 0; tickIndex < 12; tickIndex++) {
                 Paint p;
                 float shorter = 0;
-                switch(tickIndex % 3) {
+                switch (tickIndex % 3) {
                     case 0:
                         p = mTickPaintCross;
                         shorter = 0;
@@ -397,16 +392,16 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
                 }
 
                 int extend6 = 0;
-                if(tickIndex == 6) {
+                if (tickIndex == 6) {
                     extend6 = 25;
                 }
                 int extend57 = 0;
-                if(tickIndex == 5 || tickIndex == 7)
+                if (tickIndex == 5 || tickIndex == 7)
                     extend57 = 10;
 
                 float tickRot = (float) (tickIndex * Math.PI * 2 / 12);
                 float innerX = (float) Math.sin(tickRot) * (innerTickRadius - shorter - extend6 - extend57);
-                float innerY = (float) -Math.cos(tickRot) * (innerTickRadius - shorter - extend6- extend57);
+                float innerY = (float) -Math.cos(tickRot) * (innerTickRadius - shorter - extend6 - extend57);
                 float outerX = (float) Math.sin(tickRot) * outerTickRadius;
                 float outerY = (float) -Math.cos(tickRot) * outerTickRadius;
 
@@ -427,7 +422,7 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
 
             for (int ticks = 0; ticks < numTicks; ticks++) {
 
-                if(ticks == numTicks/2 - intermedTicks && numTicks <= numTicks/2) {
+                if (ticks == numTicks / 2 - intermedTicks && numTicks <= numTicks / 2) {
                     bumpBottom += 3;
                 }
                 float calcSpace = tillBorder + bumpBottom;
@@ -438,9 +433,8 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
 
 
                 canvas.drawArc(calcSpace, calcSpace, width - calcSpace, height - calcSpace,
-                        degreeStart, tickLength-space*2, true, mCalPaint);
+                        degreeStart, tickLength - space * 2, true, mCalPaint);
             }
-
 
 
             long curTime = System.currentTimeMillis();
@@ -449,19 +443,19 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
             Paint p = mCalHighlightABPaint;
             for (SimpleCalEvents ev : mCalEvents) {
 
-                if(!isInAmbientMode()) {
+                if (!isInAmbientMode()) {
                     p = ev.getPaint();
 //                    Log.v(TAG, "not ambient paint set to " + p);
-                    if(p == null) {
+                    if (p == null) {
                         p = mCalHighlightPaint;
 //                        Log.v(TAG, "no paint set");
                     }
                 }
 
                 long hS = ev.hoursStart();
-                if(hS >= 12)
+                if (hS >= 12)
                     hS -= 12; // get it on a 12 hour scale
-                if(hS >= 3)
+                if (hS >= 3)
                     hS -= 3; // rotate by 90 degrees
                 else
                     hS += 9;
@@ -469,16 +463,16 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
                 long mS = ev.minutesStart();
                 int group = 0;
                 for (int i = 1; i <= intermedTicks; i++) {
-                    if(((float)mS) < i * (60/intermedTicks)) {
+                    if (((float) mS) < i * (60 / intermedTicks)) {
                         group = i - 1;
                         break;
                     }
                 }
 
                 long hE = ev.hoursEnd();
-                if(hE > 12)
+                if (hE > 12)
                     hE -= 12; // get it on a 12 hour scale
-                if(hE >= 3)
+                if (hE >= 3)
                     hE -= 3; // rotate by 90 degrees
                 else
                     hE += 9;
@@ -486,14 +480,14 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
                 long mE = ev.minutesEnd();
                 int groupE = 0;
                 for (int i = 1; i <= intermedTicks; i++) {
-                    if(((float)mE) < i * (60/intermedTicks)) {
+                    if (((float) mE) < i * (60 / intermedTicks)) {
                         groupE = i - 1;
                         break;
                     }
                 }
 
                 long ticksTillEnd = 0;
-                if(ev.dayStart() == ev.dayEnd()) {
+                if (ev.dayStart() == ev.dayEnd()) {
                     if (hE == hS) {
                         ticksTillEnd += groupE - group;
                     } else {
@@ -517,14 +511,14 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTimeInMillis(curTime);
                 long cH = calendar.get(Calendar.HOUR_OF_DAY);
-                if(cH > 12)
+                if (cH > 12)
                     cH -= 12;
                 long cM = calendar.get(Calendar.MINUTE);
                 long removedTicks = 0;
 
-                if (ev.hoursEnd()-12 > cH && TimeHarmonizer.getDayOfTS(curTime) == ev.dayEnd()) {
+                if (ev.hoursEnd() - 12 > cH && TimeHarmonizer.getDayOfTS(curTime) == ev.dayEnd()) {
 
-                    removedTicks = (long) Math.ceil(ev.minutesEnd() / (60/intermedTicks) + (ev.hoursEnd() - 12 - cH) * intermedTicks);
+                    removedTicks = (long) Math.ceil(ev.minutesEnd() / (60 / intermedTicks) + (ev.hoursEnd() - 12 - cH) * intermedTicks);
 
 //                    Log.v(TAG, "remove " + removedTicks + " ticks from " + ticksTillEnd + " using " + cH + "," + cM + "," + ev.hoursEnd() +"," + ev.minutesEnd());
 
@@ -550,9 +544,9 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
 
             float bump = 15;
 //            canvas.drawArc(depth-2, depth-2, width - depth + 2, height-depth + 2, 0, 360, true, mAlmostBlackPaint);
-            canvas.drawArc(depth, depth, width - depth, height-depth, 0, 360/6 - 360/48, true, mBlackPaint);
-            canvas.drawRect(depth+bump+44, height/2, width - (depth+bump+44), height-(depth+bump+16), mBlackPaint);
-            canvas.drawArc(depth, depth, width - depth, height-depth, 360/4 + 360/12 + 360/48, 360 - (360/4 + 360/12 + 360/48), true, mBlackPaint);
+            canvas.drawArc(depth, depth, width - depth, height - depth, 0, 360 / 6 - 360 / 48, true, mBlackPaint);
+            canvas.drawRect(depth + bump + 44, height / 2, width - (depth + bump + 44), height - (depth + bump + 16), mBlackPaint);
+            canvas.drawArc(depth, depth, width - depth, height - depth, 360 / 4 + 360 / 12 + 360 / 48, 360 - (360 / 4 + 360 / 12 + 360 / 48), true, mBlackPaint);
         }
 
         private void drawNextEvent(Canvas canvas, int width, int height) {
@@ -561,18 +555,18 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
             int numTicks = adjCalTicks.getNumTicks();
             int curTick = cur.getTick(numTicks);
             Pair<Integer, SimpleCalEvents> firstPair = adjCalTicks.findNextSetTick(curTick);
-            if(firstPair != null) {
+            if (firstPair != null) {
                 // definitely draw some text - first or second event
                 int firstTick = firstPair.first;
                 // we're in an ongoing event (should we show the next upcoming one?)
 //                Log.v(TAG, "cur " + curTick + " first " + firstTick);
-                if(curTick == firstTick) {
+                if (curTick == firstTick) {
                     // find second entry (if exists) to try to decide if we print this or the next event
                     Pair<Integer, SimpleCalEvents> secondPair = adjCalTicks.findNextSetTickDiffOf(firstPair);
-                    if(secondPair != null) {
+                    if (secondPair != null) {
 //                        Log.v(TAG, "second " + secondPair.first);
                         // if it starts within the next hour please do so
-                        if(TimeHarmonizer.calcTickDiff(numTicks, firstTick, secondPair.first) <= 2) {
+                        if (TimeHarmonizer.calcTickDiff(numTicks, firstTick, secondPair.first) <= 2) {
                             drawNextEvent_internal(canvas, width, height, firstPair.second);
                             return;
                         }
@@ -687,7 +681,7 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
 
                 long begin = System.currentTimeMillis() - 1000 * 60 * 60;
                 Uri.Builder builder =
-                    WearableCalendarContract.Instances.CONTENT_URI.buildUpon();
+                        WearableCalendarContract.Instances.CONTENT_URI.buildUpon();
                 ContentUris.appendId(builder, begin);
                 ContentUris.appendId(builder, begin + DateUtils.HOUR_IN_MILLIS * 13);
 //                String []projection = {CalendarContract.Events.DTSTART, CalendarContract.Events.DTEND};
@@ -700,9 +694,9 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
 
 //                Log.v(TAG, Arrays.toString(cursor.getColumnNames()));
                 List<SimpleCalEvents> tmpList = new LinkedList<>();
-                if(numMeetings > 0) {
-                    int startTimeId =  cursor.getColumnIndex("dtStart");
-                    int endTimeId =  cursor.getColumnIndex("dtEnd");
+                if (numMeetings > 0) {
+                    int startTimeId = cursor.getColumnIndex("dtStart");
+                    int endTimeId = cursor.getColumnIndex("dtEnd");
                     int colorId = cursor.getColumnIndex("calendar_color");
                     int displayColorId = cursor.getColumnIndex("displayColor");
                     int eventColorId = cursor.getColumnIndex("eventColor");
@@ -713,8 +707,8 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
 
 //                    Log.v(TAG, "[" + startTimeId +", "+endTimeId+", "+colorId+", "+allDayId+", "+titleId+", "+locationId + "]" );
 
-                    if(startTimeId != -1 && endTimeId != -1) {
-                       do {
+                    if (startTimeId != -1 && endTimeId != -1) {
+                        do {
                             try {
                                 long startTime = Long.parseLong(cursor.getString(startTimeId));
                                 long endTime = Long.parseLong(cursor.getString(endTimeId));
@@ -725,7 +719,7 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
                                 String title = cursor.getString(titleId);
                                 String location = cursor.getString(locationId);
 
-                                if(allDay == 0) {
+                                if (allDay == 0) {
 
 //                                    Log.v(TAG, "added: [" + startTime + ", " + endTime + ", " + color + "," + displayColor + ", " + allDay + ", " + title + ", " + location + "]");
                                     tmpList.add(new SimpleCalEvents(title, location, color, startTime, endTime));
@@ -748,7 +742,7 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
 //                Log.v(TAG, tmpList.toString());
 //                Log.v(TAG, mCalEvents.toString());
 
-                if(!tmpList.equals(mCalEvents)) {
+                if (!tmpList.equals(mCalEvents)) {
                     // only update when calendar has changed
                     mCalEvents = tmpList;
 //                    Log.v(TAG, "calling CH.update");

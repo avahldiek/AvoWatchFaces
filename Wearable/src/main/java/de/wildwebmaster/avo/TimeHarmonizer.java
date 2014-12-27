@@ -17,18 +17,6 @@ public class TimeHarmonizer {
         c.setTimeInMillis(time);
     }
 
-    public int getHours() {
-        return c.get(Calendar.HOUR_OF_DAY);
-    }
-
-    public int getMinutes() {
-        return c.get(Calendar.MINUTE);
-    }
-
-    public int getDay() {
-        return c.get(Calendar.DAY_OF_MONTH);
-    }
-
     public static int getHourOfTS(long ts) {
 
         Calendar calendar = Calendar.getInstance();
@@ -49,30 +37,42 @@ public class TimeHarmonizer {
         return calendar.get(Calendar.DAY_OF_MONTH);
     }
 
+    public static int calcTickDiff(int numTicks, int first, int second) {
+        if (second > first)
+            return second - first;
+        else
+            return numTicks - first + second;
+    }
+
+    public int getHours() {
+        return c.get(Calendar.HOUR_OF_DAY);
+    }
+
+    public int getMinutes() {
+        return c.get(Calendar.MINUTE);
+    }
+
+    public int getDay() {
+        return c.get(Calendar.DAY_OF_MONTH);
+    }
+
     public int getTick(int numTicks) {
 
-        int intermedTicks = numTicks/12;
+        int intermedTicks = numTicks / 12;
 
         int h = this.getHours();
-        if(h >= 12)
+        if (h >= 12)
             h -= 12; // get it on a 12 hour scale
 
         int min = this.getMinutes();
         int group = 0;
         for (int i = 1; i <= intermedTicks; i++) {
-            if(((float)min) < i * (60/intermedTicks)) {
+            if (((float) min) < i * (60 / intermedTicks)) {
                 group = i - 1;
                 break;
             }
         }
 
-        return h*intermedTicks + group;
-    }
-
-    public static int calcTickDiff(int numTicks, int first, int second) {
-        if(second > first)
-            return second - first;
-        else
-            return numTicks - first + second;
+        return h * intermedTicks + group;
     }
 }

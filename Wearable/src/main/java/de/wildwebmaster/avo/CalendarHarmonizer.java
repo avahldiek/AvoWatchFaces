@@ -26,7 +26,7 @@ public class CalendarHarmonizer {
         adjTicks.clear();
         TimeHarmonizer cur = new TimeHarmonizer(System.currentTimeMillis());
 
-        for(SimpleCalEvents event : newCalEvents) {
+        for (SimpleCalEvents event : newCalEvents) {
 
 
 //            Log.v(TAG, "found event " + event);
@@ -38,7 +38,7 @@ public class CalendarHarmonizer {
 
 //            Log.v(TAG, "event start tick " + startTick + " endTick " + endTick);
 
-            if(startTick < endTick) {
+            if (startTick < endTick) {
                 // regular case (no day boundary)
                 length = endTick - startTick;
             } else {
@@ -50,20 +50,20 @@ public class CalendarHarmonizer {
 //            Log.v(TAG, "event length " + length);
 
             int set = 0;
-            for(int tick = 0; tick < length; tick++) {
+            for (int tick = 0; tick < length; tick++) {
 
-                int curTick = (tick+startTick)%numTicks;
-                if(adjTicks.isTickSet(curTick)) {
+                int curTick = (tick + startTick) % numTicks;
+                if (adjTicks.isTickSet(curTick)) {
 //                    Log.v(TAG, "continue " + curTick);
                     continue;
                 }
-                if(curTick == cur.getTick(numTicks)) {
+                if (curTick == cur.getTick(numTicks)) {
 //                    Log.v(TAG, "break at "+ curTick+ "," + adjTicks.isTickSet(curTick) + "," +cur.getTick(numTicks));
                     break;
                 }
 
 //                Log.v(TAG, "added tick " + (tick + startTick) );
-                adjTicks.setTick((tick + startTick)%numTicks, event);
+                adjTicks.setTick((tick + startTick) % numTicks, event);
                 set = 1;
             }
         }

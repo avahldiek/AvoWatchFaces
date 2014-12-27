@@ -53,7 +53,7 @@
                     android:resource="@drawable/preview_analog_circular" />
             <meta-data
                 android:name="com.google.android.wearable.watchface.companionConfigurationAction"
-                android:value="com.example.android.wearable.watchface.CONFIG_AVO" />
+                android:value="de.wildwebmaster.avo.CONFIG_AVO" />
             <intent-filter>
                 <action android:name="android.service.wallpaper.WallpaperService" />
                 <category android:name="com.google.android.wearable.watchface.category.WATCH_FACE" />

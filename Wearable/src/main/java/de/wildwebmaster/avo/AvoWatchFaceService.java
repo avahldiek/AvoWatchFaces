@@ -25,27 +25,20 @@ import android.support.wearable.provider.WearableCalendarContract;
 import android.support.wearable.watchface.CanvasWatchFaceService;
 import android.support.wearable.watchface.WatchFaceService;
 import android.support.wearable.watchface.WatchFaceStyle;
-import android.text.DynamicLayout;
-import android.text.Editable;
-import android.text.SpannableStringBuilder;
 import android.text.TextPaint;
 import android.text.format.DateUtils;
 import android.text.format.Time;
 import android.util.Log;
+import android.util.Pair;
 import android.view.Gravity;
 import android.view.SurfaceHolder;
-
-import de.wildwebmaster.avo.R;
 
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.TimeZone;
-
-import de.wildwebmaster.avo.cal.SimpleCalEvents;
 
 /**
  * Avo WatchFace displaying the time with a continuous seconds finger & calendar details.
@@ -74,6 +67,8 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
         boolean mMute;
         Time mTime;
         float curMinRot = -1.0f;
+        AdjustableTicks<SimpleCalEvents> adjCalTicks;
+        CalendarHarmonizer CH;
 
         private AsyncTask<Void, Void, Integer> mLoadMeetingsTask;
         static final int MSG_LOAD_MEETINGS = 0;
@@ -224,6 +219,10 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
             mLoadMeetingsHandler.sendEmptyMessage(MSG_LOAD_MEETINGS);
 
             mCalEvents = new LinkedList<>();
+
+            Log.v(TAG, "call adjustableticks constructor");
+            adjCalTicks = new AdjustableTicks<SimpleCalEvents>(48, 0, 12);
+            CH = new CalendarHarmonizer(48, adjCalTicks);
         }
 
         @Override
@@ -301,7 +300,9 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
             canvas.drawRect(0,0,width, height, new Paint(Color.BLACK));
 
                 // create save
-            drawCalTicks(canvas, width, height);
+            //drawCalTicks(canvas, width, height);
+            if(adjCalTicks != null)
+                adjCalTicks.draw(canvas, width, height);
             drawTicks(canvas, centerX, centerY);
 
             if (!isInAmbientMode()) {
@@ -429,12 +430,13 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
                 if(ticks == numTicks/2 - intermedTicks && numTicks <= numTicks/2) {
                     bumpBottom += 3;
                 }
+                float calcSpace = tillBorder + bumpBottom;
 
                 float degreeStart = ticks * tickLength + space;
 
                 //Log.v(TAG, "degreestart " + Float.toString(degreeStart));
 
-                float calcSpace = tillBorder + bumpBottom;
+
                 canvas.drawArc(calcSpace, calcSpace, width - calcSpace, height - calcSpace,
                         degreeStart, tickLength-space*2, true, mCalPaint);
             }
@@ -457,9 +459,12 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
                 }
 
                 long hS = ev.hoursStart();
-                if(hS > 12)
+                if(hS >= 12)
                     hS -= 12; // get it on a 12 hour scale
-                hS -= 3; // rotate by 90 degrees
+                if(hS >= 3)
+                    hS -= 3; // rotate by 90 degrees
+                else
+                    hS += 9;
 
                 long mS = ev.minutesStart();
                 int group = 0;
@@ -473,7 +478,11 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
                 long hE = ev.hoursEnd();
                 if(hE > 12)
                     hE -= 12; // get it on a 12 hour scale
-                hE -= 3; // rotate by 90 degrees
+                if(hE >= 3)
+                    hE -= 3; // rotate by 90 degrees
+                else
+                    hE += 9;
+
                 long mE = ev.minutesEnd();
                 int groupE = 0;
                 for (int i = 1; i <= intermedTicks; i++) {
@@ -484,19 +493,26 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
                 }
 
                 long ticksTillEnd = 0;
-                if(hE == hS) {
-                    ticksTillEnd += groupE - group;
+                if(ev.dayStart() == ev.dayEnd()) {
+                    if (hE == hS) {
+                        ticksTillEnd += groupE - group;
+                    } else {
+                        // ticks from current hour
+                        ticksTillEnd += intermedTicks - group;
+                        // tricks from end hour
+                        ticksTillEnd += groupE;
+                        // hour ticks
+                        ticksTillEnd += (ev.hoursEnd() - (ev.hoursStart() + 1)) * intermedTicks;
+                    }
                 } else {
-                    // ticks from current hour
-                    ticksTillEnd += intermedTicks - group;
-                    // tricks from end hour
-                    ticksTillEnd += groupE;
-                    // hour ticks
-                    ticksTillEnd += (ev.hoursEnd() - (ev.hoursStart() + 1)) * intermedTicks;
+                    ticksTillEnd += intermedTicks - group; // till the hour ends
+                    ticksTillEnd += (24 - (ev.hoursStart() + 1)) * intermedTicks; // till the end of the day
+                    ticksTillEnd += (ev.hoursEnd()) * intermedTicks; // till the hour of end of event;
+                    ticksTillEnd += groupE; // add ticks inside the last hour
                 }
                 // ticks in the middle
 
-                Log.v(TAG, curTime + " > " + ev.getEndTime());
+//                Log.v(TAG, curTime + " > " + ev.getEndTime());
 
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTimeInMillis(curTime);
@@ -504,14 +520,16 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
                 if(cH > 12)
                     cH -= 12;
                 long cM = calendar.get(Calendar.MINUTE);
+                long removedTicks = 0;
 
-                if (ev.hoursEnd()-12 > cH) {
+                if (ev.hoursEnd()-12 > cH && TimeHarmonizer.getDayOfTS(curTime) == ev.dayEnd()) {
 
-                    long toRemove = (long) Math.ceil(ev.minutesEnd() / (60/intermedTicks) + (ev.hoursEnd() - 12 - cH) * intermedTicks);
+                    removedTicks = (long) Math.ceil(ev.minutesEnd() / (60/intermedTicks) + (ev.hoursEnd() - 12 - cH) * intermedTicks);
 
-//                    Log.v(TAG, "remove " + toRemove + " ticks from " + ticksTillEnd + " using " + cH + "," + cM + "," + ev.hoursEnd() +"," + ev.minutesEnd());
+//                    Log.v(TAG, "remove " + removedTicks + " ticks from " + ticksTillEnd + " using " + cH + "," + cM + "," + ev.hoursEnd() +"," + ev.minutesEnd());
 
-                    ticksTillEnd -= toRemove;
+
+                    ticksTillEnd -= removedTicks;
 
                 }
 
@@ -527,7 +545,6 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
                             startAngle, tickLength - space * 2, true, p);
                 }
 
-
             }
 
 
@@ -539,28 +556,47 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
         }
 
         private void drawNextEvent(Canvas canvas, int width, int height) {
-            if(mCalEvents != null && mCalEvents.size() > 0) {
-                final int maxTextLen = 22;
-                SimpleCalEvents first = null;
-                for (SimpleCalEvents sce : mCalEvents) {
-                    if(!sce.startedPastSeconds(60*15)) {
-                        first = sce;
-                        break;
+
+            TimeHarmonizer cur = new TimeHarmonizer(System.currentTimeMillis());
+            int numTicks = adjCalTicks.getNumTicks();
+            int curTick = cur.getTick(numTicks);
+            Pair<Integer, SimpleCalEvents> firstPair = adjCalTicks.findNextSetTick(curTick);
+            if(firstPair != null) {
+                // definitely draw some text - first or second event
+                int firstTick = firstPair.first;
+                // we're in an ongoing event (should we show the next upcoming one?)
+//                Log.v(TAG, "cur " + curTick + " first " + firstTick);
+                if(curTick == firstTick) {
+                    // find second entry (if exists) to try to decide if we print this or the next event
+                    Pair<Integer, SimpleCalEvents> secondPair = adjCalTicks.findNextSetTickDiffOf(firstPair);
+                    if(secondPair != null) {
+//                        Log.v(TAG, "second " + secondPair.first);
+                        // if it starts within the next hour please do so
+                        if(TimeHarmonizer.calcTickDiff(numTicks, firstTick, secondPair.first) <= 2) {
+                            drawNextEvent_internal(canvas, width, height, firstPair.second);
+                            return;
+                        }
                     }
-
-//                    Log.v(TAG, "pass " + sce);
                 }
-//
-//                Log.v(TAG, "first " + first);
 
-                if(first != null) {
-                    String title = first.getTitle();
-                    String location = first.getLocation();
-                    canvas.drawText(title, 0, (title.length() > maxTextLen) ? maxTextLen : title.length(), 70, height - 90, mTextPaint);
-                    canvas.drawLine(70, height - 85, width - 70, height - 85, mTickPaintRegular);
-                    canvas.drawText(location, 0, (location.length() > maxTextLen) ? maxTextLen : location.length(), 70, height - 70, mTextPaint);
-                }
+                // print the one you found
+                // - first future event
+                // - decision based on how long this ongoing event will continue
+                drawNextEvent_internal(canvas, width, height, firstPair.second);
+                return;
             }
+
+            // draw nothing
+        }
+
+        private void drawNextEvent_internal(Canvas canvas, int width, int height, SimpleCalEvents event) {
+
+            final int maxTextLen = 22;
+            String title = event.getTitle();
+            String location = event.getLocation();
+            canvas.drawText(title, 0, (title.length() > maxTextLen) ? maxTextLen : title.length(), 70, height - 90, mTextPaint);
+            canvas.drawLine(70, height - 85, width - 70, height - 85, mTickPaintRegular);
+            canvas.drawText(location, 0, (location.length() > maxTextLen) ? maxTextLen : location.length(), 70, height - 70, mTextPaint);
         }
 
         @Override
@@ -661,8 +697,8 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
                 cursor.moveToFirst();
 
 //                Log.v(TAG, Arrays.toString(cursor.getColumnNames()));
+                List<SimpleCalEvents> tmpList = new LinkedList<>();
                 if(numMeetings > 0) {
-                    mCalEvents.clear();
                     int startTimeId =  cursor.getColumnIndex("dtStart");
                     int endTimeId =  cursor.getColumnIndex("dtEnd");
                     int colorId = cursor.getColumnIndex("calendar_color");
@@ -689,8 +725,8 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
 
                                 if(allDay == 0) {
 
-                                    Log.v(TAG, "added: [" + startTime + ", " + endTime + ", " + color + "," + displayColor + ", " + allDay + ", " + title + ", " + location + "]");
-                                    mCalEvents.add(new SimpleCalEvents(title, location, color, startTime, endTime));
+//                                    Log.v(TAG, "added: [" + startTime + ", " + endTime + ", " + color + "," + displayColor + ", " + allDay + ", " + title + ", " + location + "]");
+                                    tmpList.add(new SimpleCalEvents(title, location, color, startTime, endTime));
                                 } else {
 //                                    Log.v(TAG, "removed due to all day: [" + startTime + ", " + endTime + ", " + color + ", " + allDay + ", " + title + ", " + location + "]");
                                 }
@@ -704,7 +740,18 @@ public class AvoWatchFaceService extends CanvasWatchFaceService {
 
                 cursor.close();
 
-                Collections.sort(mCalEvents);
+                Collections.sort(tmpList);
+
+
+//                Log.v(TAG, tmpList.toString());
+//                Log.v(TAG, mCalEvents.toString());
+
+                if(!tmpList.equals(mCalEvents)) {
+                    // only update when calendar has changed
+                    mCalEvents = tmpList;
+                    Log.v(TAG, "calling CH.update");
+                    CH.update(mCalEvents);
+                }
 
 //                Log.v(TAG, mCalEvents.toString());
 

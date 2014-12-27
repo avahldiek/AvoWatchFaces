@@ -1,4 +1,4 @@
-package de.wildwebmaster.avo.cal;
+package de.wildwebmaster.avo;
 
 import android.graphics.Paint;
 
@@ -7,7 +7,7 @@ import java.util.Calendar;
 /**
  * Created by vahldiek on 12/19/14.
  */
-public class SimpleCalEvents implements Comparable<SimpleCalEvents>{
+public class SimpleCalEvents implements Comparable<SimpleCalEvents>, Paintable{
 
     private String title;
     private String location;
@@ -15,6 +15,9 @@ public class SimpleCalEvents implements Comparable<SimpleCalEvents>{
     private long startTime = 0;
     private long endTime = 0;
     private Paint paint = null;
+
+    private TimeHarmonizer startH;
+    private TimeHarmonizer endH;
 
     private static final int SECOND = 1000;
     private static final int MINUTE = 60 * SECOND;
@@ -29,6 +32,8 @@ public class SimpleCalEvents implements Comparable<SimpleCalEvents>{
         this.startTime = startTime;
         this.endTime = endTime;
 
+        startH = new TimeHarmonizer(startTime);
+        endH = new TimeHarmonizer(endTime);
 
         this.paint = new Paint();//mCalHighlightPaint; ;
         this.paint.setColor((int)this.color);
@@ -58,19 +63,27 @@ public class SimpleCalEvents implements Comparable<SimpleCalEvents>{
 
     public long hoursStart() {
 
-        return getHourOfTS(startTime);
+        return startH.getHours();
     }
 
     public long hoursEnd() {
-        return getHourOfTS(endTime);
+        return endH.getHours();
     }
 
     public long minutesStart() {
-        return getMinutesOfTS(startTime);
+        return startH.getMinutes();
     }
 
     public long minutesEnd() {
-        return getMinutesOfTS(endTime);
+        return endH.getMinutes();
+    }
+
+    public int dayStart() {
+        return startH.getDay();
+    }
+
+    public int dayEnd() {
+        return endH.getDay();
     }
 
     public long getStartTime() {
@@ -81,24 +94,20 @@ public class SimpleCalEvents implements Comparable<SimpleCalEvents>{
         return endTime;
     }
 
-    private int getHourOfTS(long ts) {
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(ts);
-        return calendar.get(Calendar.HOUR_OF_DAY);
+    public int getHarmoziedStart(int numTicks) {
+        return startH.getTick(numTicks);
     }
 
-    private int getMinutesOfTS(long ts) {
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(ts);
-        return calendar.get(Calendar.MINUTE);
+    public int getHarmoziedEnd(int numTicks) {
+        return endH.getTick(numTicks);
     }
 
-    private int getDayOfTS(long ts) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(ts);
-        return calendar.get(Calendar.DAY_OF_MONTH);
+    public TimeHarmonizer getStartH() {
+        return startH;
+    }
+
+    public TimeHarmonizer getEndH() {
+        return endH;
     }
 
     public boolean stared() {
@@ -121,5 +130,18 @@ public class SimpleCalEvents implements Comparable<SimpleCalEvents>{
 
     public Paint getPaint() {
         return paint;
+    }
+
+    public boolean equals(Object o) {
+        if(o instanceof SimpleCalEvents) {
+            SimpleCalEvents snd = (SimpleCalEvents) o;
+            if(snd.startTime == this.startTime && snd.endTime == this.endTime
+                    && snd.color == this.color && snd.title.equals(this.title)
+                    && snd.location.equals(this.location)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
